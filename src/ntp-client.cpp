@@ -3,7 +3,7 @@
 const long gmtOffset_sec = 0;
 const int daylightOffset_sec = 0;
 
-void NtpClient::NtpClient(void) {
+NtpClient::NtpClient(void) {
 	_ntp_started = false;
 }
 
@@ -26,6 +26,10 @@ time_t NtpClient::getTimestamp(void) {
 	console.log(NTP_T, datetime_str);
 	console.log(NTP_T, "Current timestamp = " + String(now));
 	return now;
+}
+
+bool NtpClient::isSync(void) {
+	return _ntp_started;
 }
 
 /*

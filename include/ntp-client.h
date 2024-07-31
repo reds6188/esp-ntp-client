@@ -11,9 +11,6 @@
 #define NTP_SERVER_2	"time.nist.gov"
 #define NTP_SERVER_3	"time.google.com"
 
-void initNTP(void);
-void getDate(void);
-
 Class NtpClient {
 	private:
 		_ntp_started;
@@ -21,6 +18,7 @@ Class NtpClient {
 		NtpClient(void);
 		void begin(void);
 		time_t getTimestamp(void);
+		bool isSync(void):
 };
 
 #endif  /* NTP_CLIENT_H_ */
