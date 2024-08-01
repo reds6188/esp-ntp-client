@@ -11,14 +11,9 @@
 #define NTP_SERVER_2	"time.nist.gov"
 #define NTP_SERVER_3	"time.google.com"
 
-Class NtpClient {
-	private:
-		_ntp_started;
-	public:
-		NtpClient(void);
-		void begin(void);
-		time_t getTimestamp(void);
-		bool isSync(void):
-};
+void timeAvailable(struct timeval *t);
+void initNtpClient(void);
+time_t getTimestampNtp(void);
+bool isNtpSync(void);
 
 #endif  /* NTP_CLIENT_H_ */

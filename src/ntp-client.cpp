@@ -2,21 +2,19 @@
 
 const long gmtOffset_sec = 0;
 const int daylightOffset_sec = 0;
+bool ntp_started = false;
 
-NtpClient::NtpClient(void) {
-	_ntp_started = false;
+void timeAvailable(struct timeval *t) {
+	console.success(NTP_T, "Timestamp is available");
+	ntp_started = true;
 }
 
-void NtpClient::begin(void) {
-	//sntp_set_time_sync_notification_cb(timeAvailable);
-	sntp_set_time_sync_notification_cb([this](struct timeval *t) {
-		console.success(NTP_T, "Timestamp is available");
-		_ntp_started = true;
-	}]);
+void initNtpClient(void) {
+	sntp_set_time_sync_notification_cb(timeAvailable);
 	configTime(gmtOffset_sec, daylightOffset_sec, NTP_SERVER_1, NTP_SERVER_2, NTP_SERVER_3);  
 }
 
-time_t NtpClient::getTimestamp(void) {
+time_t getTimestampNtp(void) {
 	time_t now;
 	struct tm timeinfo;
 	char datetime_str[20];
@@ -28,12 +26,6 @@ time_t NtpClient::getTimestamp(void) {
 	return now;
 }
 
-bool NtpClient::isSync(void) {
-	return _ntp_started;
+bool isNtpSync(void) {
+	return ntp_started;
 }
-
-/*
-void timeAvailable(struct timeval *t) {
-    console.success(NTP_T, "Timestamp is available");
-}
-*/
