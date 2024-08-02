@@ -15,5 +15,6 @@ void timeAvailable(struct timeval *t);
 void initNtpClient(void);
 time_t getTimestampNtp(void);
 bool isNtpSync(void);
+void onNtpTimeAvailable(sntp_sync_time_cb_t callback);
 
 #endif  /* NTP_CLIENT_H_ */

@@ -3,6 +3,7 @@
 const long gmtOffset_sec = 0;
 const int daylightOffset_sec = 0;
 bool ntp_started = false;
+void (*cbOnMqttConnect)(void);
 
 void timeAvailable(struct timeval *t) {
 	console.success(NTP_T, "Timestamp is available");
@@ -28,4 +29,8 @@ time_t getTimestampNtp(void) {
 
 bool isNtpSync(void) {
 	return ntp_started;
+}
+
+void onNtpTimeAvailable(sntp_sync_time_cb_t callback) {
+	sntp_set_time_sync_notification_cb(callback);
 }
