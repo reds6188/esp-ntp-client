@@ -3,7 +3,6 @@
 const long gmtOffset_sec = 0;
 const int daylightOffset_sec = 0;
 bool ntp_started = false;
-void (*cbOnMqttConnect)(void);
 
 void timeAvailable(struct timeval *t) {
 	#ifdef LOG_NTP
