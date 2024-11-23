@@ -6,7 +6,9 @@ bool ntp_started = false;
 void (*cbOnMqttConnect)(void);
 
 void timeAvailable(struct timeval *t) {
+	#ifdef LOG_NTP
 	console.success(NTP_T, "Timestamp is available");
+	#endif
 	ntp_started = true;
 }
 
@@ -22,8 +24,10 @@ time_t getTimestampNtp(void) {
 	time(&now);
 	localtime_r(&now, &timeinfo);
 	sprintf(datetime_str, "%d:%d:%d %d/%d/%d", timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec, timeinfo.tm_mday, timeinfo.tm_mon, timeinfo.tm_year);
+	#ifdef LOG_NTP
 	console.log(NTP_T, datetime_str);
 	console.log(NTP_T, "Current timestamp = " + String(now));
+	#endif
 	return now;
 }
 
